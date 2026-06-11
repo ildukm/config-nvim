@@ -41,3 +41,41 @@ set_aws_hl()
 
 -- 컬러스킴을 바꿔도 색이 유지되도록
 vim.api.nvim_create_autocmd("ColorScheme", { callback = set_aws_hl })
+
+-- ~/.kube/config 를 yaml 로
+vim.filetype.add({
+  pattern = {
+    [".*/%.kube/config"] = "yaml",
+  },
+})
+
+-- kubeconfig 하이라이트 색
+local function set_kube_hl()
+  local hl = vim.api.nvim_set_hl
+  hl(0, "kubeUrl",        { fg = "#7aa2f7", underline = true })
+  hl(0, "kubeCluster",    { fg = "#ff9e64", bold = true })
+  hl(0, "kubeNamespace",  { fg = "#f7768e", bold = true })
+  hl(0, "kubeCurrentCtx", { fg = "#9ece6a", bold = true })
+  hl(0, "kubeAwsProfile", { fg = "#e0af68", bold = true })
+  hl(0, "kubeCommand",    { fg = "#2ac3de", bold = true })
+  hl(0, "kubeToken",      { fg = "#565f89", italic = true })
+end
+set_kube_hl()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = set_kube_hl })
+
+-- k8s manifest 하이라이트 색
+local function set_k8s_hl()
+  local hl = vim.api.nvim_set_hl
+  hl(0, "k8sKind",      { fg = "#bb9af7", bold = true })
+  hl(0, "k8sName",      { fg = "#9ece6a", bold = true })
+  hl(0, "k8sNamespace", { fg = "#f7768e", bold = true })
+  hl(0, "k8sImage",     { fg = "#ff9e64" })
+  hl(0, "k8sImageTag",  { fg = "#e0af68", bold = true })
+  hl(0, "k8sArn",       { fg = "#ff9e64" })
+  hl(0, "k8sAccount",   { fg = "#e0af68", bold = true })
+  hl(0, "k8sLabelKey",  { fg = "#7dcfff", italic = true })
+  hl(0, "k8sTimestamp", { fg = "#565f89", italic = true })
+  hl(0, "k8sUid",       { fg = "#565f89", italic = true })
+end
+set_k8s_hl()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = set_k8s_hl })
